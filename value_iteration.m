@@ -1,4 +1,4 @@
-function [v] = value_iteration(P,epsilon,v_init,actions,lambda,state_space)
+function [v] = value_iteration(P,epsilon,v_init,actions,lambda,state_space,Cost,e_return)
 %This is the value iteration algorithm to obtain the optimal policy
 %   P is the transition probability matrix; note we combine them into a 3D
 %       array where each frame corresponds to an action
@@ -8,11 +8,11 @@ function [v] = value_iteration(P,epsilon,v_init,actions,lambda,state_space)
 N = size(P,1);
 v = zeros(N,1);
 %number of actions
-num_act  = size(actions,1);
-max_in_action = zeros(num_act,1);
+num_act  = length(actions);
 for s=1:N
+    max_in_action = zeros(num_act,1);
     for a=1:num_act
-        max_in_action(a) = reward(s,a,state_space);
+        max_in_action(a) = reward(s,a,state_space,Cost,e_return,actions);
         %Sum over possible states
         for j=1:N
             %p(i,j,k) = P(j|i,k)
@@ -24,7 +24,7 @@ end
 if abs(v-v_init) < epsilon*(1-lambda)/(2*lambda)
     %do arg max line
 else
-    value_iteration(P,epsilon,v,actions,lambda,state_space);
+    v=value_iteration(P,epsilon,v,actions,lambda,state_space,Cost,e_return);
 end
 end
 

@@ -1,4 +1,4 @@
-function [r] = reward(s,a,state_space)
+function [r] = reward(s,a,state_space,Cost,e_return,actions)
 %This function computes the reward when we are in state s, take action a
 %   s is the state we choose, should be a vector [e,w]
 %   a is the action, should be a scalar
@@ -9,9 +9,6 @@ function [r] = reward(s,a,state_space)
 %   case; note cost function also needs 
 return_index = state_space(s,1)+1;
 weight = state_space(s,2);
-e_return = [-0.01,0.0001,0.005];
-Cost = 0.003;
-actions = -2:2;
 action = actions(a);
 r = (weight+action)*e_return(return_index)-Cost*abs(action);
 end
