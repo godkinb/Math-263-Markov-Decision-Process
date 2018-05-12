@@ -1,6 +1,6 @@
 function [r] = reward(s,a,state_space,Cost,e_return,actions)
 %This function computes the reward when we are in state s, take action a
-%   s is the state we choose, should be a vector [e,w]
+%   s is the state we choose, (in paper, a vector [e,w])
 %   a is the action, should be a scalar
 %   e_return is either a function, or already allocated vector which
 %       translates expectation of stock return states to the actual expected

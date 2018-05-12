@@ -43,10 +43,14 @@ state_space(7,1) = 0;
 state_space(8,1) = 1;
 state_space(9,1) = 2;
 
-port_valuation = value_iteration(P,epsilon,v_init,actions,lambda,state_space,Cost,e_return);
+[port_valuation,acts_take] = value_iteration(P,epsilon,v_init,actions,lambda,state_space,Cost,e_return);
 
-
-
+%Translate the acts_take, back to the representation of actions in the MDP
+%       paper
+acts_take_paper = zeros(length(acts_take),1);
+for i=1:length(acts_take)
+    acts_take_paper(i) = actions(acts_take(i));    
+end
 
 
 %{
